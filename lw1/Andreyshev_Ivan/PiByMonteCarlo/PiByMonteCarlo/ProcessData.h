@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 
 namespace PiCalc
 {
@@ -7,11 +8,9 @@ namespace PiCalc
 		ProcessData(long iterationsCount)
 		{
 			this->iterationsCount = iterationsCount;
-			size_t countInside = 0;
-			pointsInside = &countInside;
 		}
 
 		size_t iterationsCount;
-		size_t* pointsInside;
+		size_t pointsInside = 0;
 	};
 }

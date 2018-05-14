@@ -112,7 +112,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CMath.cpp" />
-    <ClCompile Include="CMonteCarkiCakc.cpp" />
+    <ClCompile Include="CMonteCarloCalc.cpp" />
     <ClCompile Include="CRandomizer.cpp" />
     <ClCompile Include="CTimer.cpp" />
     <ClCompile Include="main.cpp" />
