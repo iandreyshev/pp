@@ -3,6 +3,8 @@
 #include <iostream>
 #include <Windows.h>
 
+#include "ProcessData.h"
+
 namespace PiCalc
 {
 	class CMonteCarloCalc
@@ -13,8 +15,8 @@ namespace PiCalc
 		float Get();
 
 	private:
-		void InitActions();
-		void InvokeActions();
+		std::vector<ProcessData> InitActions();
+		float InvokeActions(std::vector<ProcessData> processData);
 
 		int m_iterationsCount;
 		int m_threadsCount;

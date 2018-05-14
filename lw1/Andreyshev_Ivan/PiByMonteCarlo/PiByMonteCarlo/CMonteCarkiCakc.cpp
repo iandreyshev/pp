@@ -3,7 +3,6 @@
 #include <random>
 
 #include "CMonteCarloCalc.h"
-#include "ProcessData.h"
 #include "CMath.h"
 #include "CRandomizer.h"
 
@@ -17,18 +16,28 @@ namespace PiCalc
 		DWORD WINAPI CalcPointsAction(LPVOID param)
 		{
 			ProcessData* processData = reinterpret_cast<ProcessData*>(param);
+			std::cout << "Data casted with iterations " << processData->iterationsCount << std::endl;
+
 			CRandomizer randomizer = CRandomizer();
+			std::cout << "Randomizer initialized" << std::endl;
+
 			CMath math = CMath();
+			std::cout << "Math initialized" << std::endl;
+
 			auto radius = 1.f;
+			std::cout << "Radius initialized" << std::endl;
 
 			for (size_t i = 0; i < processData->iterationsCount; ++i)
 			{
 				auto x = randomizer.Get(-radius, radius);
 				auto y = randomizer.Get(-radius, radius);
+				std::cout << "Try hit: " << x << " " << y << std::endl;
 
 				if (math.HitTest(x, y, radius))
 				{
+					std::cout << "Hit success for: " << x << " " << y << std::endl;
 					InterlockedIncrement(processData->pointsInside);
+					std::cout << "Increment completed: " << x << " " << y << std::endl;
 				}
 			}
 
@@ -62,15 +71,15 @@ namespace PiCalc
 
 	float CMonteCarloCalc::Get()
 	{
-		InitActions();
-		InvokeActions();
+		auto processData = InitActions();
+		auto result = InvokeActions(processData);
 
 		m_threads.clear();
 
-		return 0;
+		return result;
 	}
 
-	void CMonteCarloCalc::InitActions()
+	std::vector<ProcessData> CMonteCarloCalc::InitActions()
 	{
 		size_t iterationsByThread = m_iterationsCount / m_threadsCount;
 		size_t remainingIterations = m_iterationsCount % m_threadsCount;
@@ -101,9 +110,35 @@ namespace PiCalc
 				processData[i].iterationsCount++;
 			}
 		}
+
+		std::cout << "Iterations by threads:" << std::endl;
+		std::for_each(processData.begin(), processData.end(), [](auto element) {
+			std::cout << element.iterationsCount << std::endl;
+		});
+
+		return processData;
 	}
 
-	void CMonteCarloCalc::InvokeActions()
+	float CMonteCarloCalc::InvokeActions(std::vector<ProcessData> processData)
 	{
+		std::cout << "Start init actions" << std::endl;
+
+		std::for_each(processData.begin(), processData.end(), [&](auto element) {
+			m_threads.push_back(CreateThread(NULL, 0, CalcPointsAction, &element, 0, 0));
+		});
+
+		std::cout << "End init actions" << std::endl;
+
+		WaitForMultipleObjects(DWORD(m_threads.size()), m_threads.data(), true, INFINITE);
+
+		std::cout << "End wait actions" << std::endl;
+
+		float innerHistCount = 0;
+
+		std::for_each(processData.begin(), processData.end(), [&](auto element) {
+			innerHistCount += *element.pointsInside;
+		});
+
+		return 4.f * innerHistCount / m_iterationsCount;
 	}
 }
