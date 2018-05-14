@@ -16,7 +16,9 @@ namespace PiCalc
 
 	private:
 		std::vector<ProcessData> InitActions();
+
 		float InvokeActions(std::vector<ProcessData> &processData);
+		float InvokeActionsAsync(std::vector<ProcessData> &processData);
 
 		int m_iterationsCount;
 		int m_threadsCount;

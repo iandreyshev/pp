@@ -7,11 +7,17 @@ namespace PiCalc
 {
 	CRandomizer::CRandomizer()
 	{
-		std::srand(static_cast<unsigned>(time(0)));
+		std::random_device device;
+		m_randomEngine = std::mt19937(device());
 	}
 
 	float CRandomizer::Get(float min, float max)
 	{
-		return min + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (max - min)));
+		std::uniform_real_distribution<float> distribution(
+			min, std::nextafter(
+				max, std::numeric_limits<float>::max()
+			));
+
+		return distribution(m_randomEngine);
 	}
 }

@@ -63,7 +63,16 @@ namespace PiCalc
 	float CMonteCarloCalc::Get()
 	{
 		auto processData = InitActions();
-		auto result = InvokeActions(processData);
+		float result;
+
+		if (m_threadsCount == 1)
+		{
+			result = InvokeActions(processData);
+		}
+		else
+		{
+			result = InvokeActionsAsync(processData);
+		}
 
 		m_threads.clear();
 
@@ -105,7 +114,7 @@ namespace PiCalc
 		return processData;
 	}
 
-	float CMonteCarloCalc::InvokeActions(std::vector<ProcessData> &processData)
+	float CMonteCarloCalc::InvokeActionsAsync(std::vector<ProcessData> &processData)
 	{
 		std::for_each(processData.begin(), processData.end(), [&](ProcessData& element) {
 			auto thread = CreateThread(NULL, 0, CalcPointsAction, &element, 0, 0);
@@ -113,6 +122,19 @@ namespace PiCalc
 		});
 
 		WaitForMultipleObjects(DWORD(m_threads.size()), m_threads.data(), true, INFINITE);
+
+		float innerHistCount = 0;
+
+		std::for_each(processData.begin(), processData.end(), [&](auto element) {
+			innerHistCount += element.pointsInside;
+		});
+
+		return 4.f * innerHistCount / m_iterationsCount;
+	}
+
+	float CMonteCarloCalc::InvokeActions(std::vector<ProcessData> &processData)
+	{
+		CalcPointsAction(&processData[0]);
 
 		float innerHistCount = 0;
 
