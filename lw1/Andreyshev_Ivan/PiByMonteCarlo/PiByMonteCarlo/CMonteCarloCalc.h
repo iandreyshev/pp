@@ -1,6 +1,7 @@
 #pragma once
+#include <vector>
 #include <iostream>
-#include "PiCalcResult.h"
+#include <Windows.h>
 
 namespace PiCalc
 {
@@ -9,11 +10,17 @@ namespace PiCalc
 	public:
 		CMonteCarloCalc(int iterationsCount, int threadsCount);
 
-		PiCalcResult Get();
+		float Get();
 
 	private:
+		void InitActions();
+		void InvokeActions();
+
 		int m_iterationsCount;
 		int m_threadsCount;
 
+		std::vector<HANDLE> m_threads;
+
 	};
 }
+

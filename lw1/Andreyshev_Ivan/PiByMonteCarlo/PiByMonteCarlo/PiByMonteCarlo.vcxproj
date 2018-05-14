@@ -111,12 +111,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CMath.cpp" />
     <ClCompile Include="CMonteCarkiCakc.cpp" />
+    <ClCompile Include="CRandomizer.cpp" />
+    <ClCompile Include="CTimer.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMonteCarloCalc.h" />
-    <ClInclude Include="PiCalcResult.h" />
+    <ClInclude Include="CMath.h" />
+    <ClInclude Include="CRandomizer.h" />
+    <ClInclude Include="CTimer.h" />
+    <ClInclude Include="ProcessData.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

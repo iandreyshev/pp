@@ -4,7 +4,6 @@ namespace PiCalc
 {
 	struct PiCalcResult
 	{
-		long spendTimeInMillis;
-		double pi;
+		const double value;
 	};
 }

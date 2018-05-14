@@ -21,12 +21,30 @@
     <ClCompile Include="CMonteCarkiCakc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CMath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CRandomizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CTimer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMonteCarloCalc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PiCalcResult.h">
+    <ClInclude Include="CMath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcessData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CRandomizer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CTimer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

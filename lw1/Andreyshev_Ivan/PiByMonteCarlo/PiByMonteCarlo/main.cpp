@@ -1,6 +1,10 @@
 #include <iostream>
 #include <string>
 
+#include "CMonteCarloCalc.h"
+#include "PiCalcResult.h"
+#include "CTimer.h"
+
 namespace
 {
 	const int HELP_ARGS_COUNT = 2;
@@ -9,6 +13,7 @@ namespace
 
 void HandleHelpCommand(char* argv[]);
 void HandleProcessCommand(char* argv[]);
+void PrintResult(float value, float spendTime);
 
 int main(int argc, char* argv[])
 {
@@ -30,7 +35,7 @@ int main(int argc, char* argv[])
 	}
 	catch (const std::exception& ex)
 	{
-		std::cerr << ex.what() << std::endl;
+		std::cerr << "Error. " << ex.what() << std::endl;
 		return 1;
 	}
 
@@ -67,5 +72,19 @@ void HandleProcessCommand(char* argv[])
 		throw std::invalid_argument("Invalid number format...");
 	}
 
-	std::cout << iterationsCount << " " << threadsCount << std::endl;
+	auto timer = PiCalc::CTimer();
+	auto calc = PiCalc::CMonteCarloCalc(iterationsCount, threadsCount);
+
+	timer.Start();
+	auto result = calc.Get();
+	auto spendTime = timer.Stop();
+
+	PrintResult(result, spendTime.count());
+}
+
+void PrintResult(float value, float spendTimeInSec)
+{
+	std::cout << "Pi calculated successfully" << std::endl
+		<< "Pi value: " << value << std::endl
+		<< "Spend time in seconds: " << spendTimeInSec << std::endl;
 }
