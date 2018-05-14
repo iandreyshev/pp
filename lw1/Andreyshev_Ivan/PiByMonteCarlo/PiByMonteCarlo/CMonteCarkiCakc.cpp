@@ -12,7 +12,7 @@ namespace PiCalc
 	namespace
 	{
 		const int MIN_ITERATIONS_COUNT = 0;
-		const int MIN_THREADS_COUNT = 0;
+		const int MIN_THREADS_COUNT = 1;
 
 		DWORD WINAPI CalcPointsAction(LPVOID param)
 		{
@@ -65,14 +65,42 @@ namespace PiCalc
 		InitActions();
 		InvokeActions();
 
+		m_threads.clear();
+
 		return 0;
 	}
 
 	void CMonteCarloCalc::InitActions()
 	{
-		ProcessData data = ProcessData(m_iterationsCount);
+		size_t iterationsByThread = m_iterationsCount / m_threadsCount;
+		size_t remainingIterations = m_iterationsCount % m_threadsCount;
 
-		m_threads.push_back(CreateThread(NULL, 0, CalcPointsAction, &data, 0, 0));
+		std::vector<ProcessData> processData;
+
+		if (iterationsByThread > 0)
+		{
+			for (auto i = 0; i < m_threadsCount; ++i)
+			{
+				processData.push_back(ProcessData(iterationsByThread));
+			}
+		}
+
+		for (size_t i = 0; i < remainingIterations; ++i)
+		{
+			if (i == remainingIterations)
+			{
+				break;
+			}
+
+			if (processData.size() <= i)
+			{
+				processData.push_back(ProcessData(1));
+			}
+			else
+			{
+				processData[i].iterationsCount++;
+			}
+		}
 	}
 
 	void CMonteCarloCalc::InvokeActions()
