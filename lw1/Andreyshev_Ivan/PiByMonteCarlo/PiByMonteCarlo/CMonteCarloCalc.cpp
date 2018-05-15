@@ -21,7 +21,7 @@ namespace PiCalc
 			CMath math = CMath();
 			auto radius = 1.f;
 
-			for (size_t i = 0; i < 100; ++i)
+			for (size_t i = 0; i < processData->iterationsCount; ++i)
 			{
 				auto x = randomizer.Get(-radius, radius);
 				auto y = randomizer.Get(-radius, radius);
@@ -67,7 +67,7 @@ namespace PiCalc
 
 		if (m_threadsCount == 1)
 		{
-			result = InvokeActions(processData);
+			result = InvokeSingleAction(processData);
 		}
 		else
 		{
@@ -132,7 +132,7 @@ namespace PiCalc
 		return 4.f * innerHistCount / m_iterationsCount;
 	}
 
-	float CMonteCarloCalc::InvokeActions(std::vector<ProcessData> &processData)
+	float CMonteCarloCalc::InvokeSingleAction(std::vector<ProcessData> &processData)
 	{
 		CalcPointsAction(&processData[0]);
 
