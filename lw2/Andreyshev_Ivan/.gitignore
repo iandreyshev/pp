@@ -1,0 +1,13 @@
+.vs/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+ipch/
+*.user
+*.opendb
+*.opensdf
+*.sdf
+*.cachefile
+*.VC.db
+*.VC.VC.opendb
