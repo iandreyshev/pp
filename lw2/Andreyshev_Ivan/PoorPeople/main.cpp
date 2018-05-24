@@ -1,24 +1,29 @@
 #include <iostream>
 #include <string>
 
-namespace
-{
-	const int MIN_ARGS_COUNT = 7;
-}
+#include "InputData.h"
+#include "Hotel.h"
+#include "EmulatorEngine.h"
+#include "CoutLogger.h"
+
+InputData ReadInput();
+void FillHotel(Hotel& hotel, const InputData& input);
 
 int main(int argc, char* argv[])
 {
+	(void)argc;
+	(void)argv;
+
 	try
 	{
-		if (argc < MIN_ARGS_COUNT)
-		{
-			std::cout << "Invalid arguments count" << std::endl
-				<< "Usage: program.exe <X> <A> <Y> <B> <Z> <C>\n";
+		CoutLogger logger;
+		Hotel hotel = Hotel(logger);
+		InputData inputData = ReadInput();
 
-			return 1;
-		}
+		FillHotel(hotel, inputData);
 
-
+		EmulatorEngine(hotel)
+			.Start(inputData.guestCount);
 	}
 	catch (const std::exception& ex)
 	{
@@ -27,4 +32,38 @@ int main(int argc, char* argv[])
 	}
 
 	return 0;
+}
+
+InputData ReadInput()
+{
+	auto read = [](const std::string& prevMessage, std::size_t& dest) {
+		try
+		{
+			std::cout << prevMessage << std::endl;
+			std::cin >> dest;
+		}
+		catch (std::exception)
+		{
+			throw std::invalid_argument("Invalid argument format. Use only size_t range.");
+		}
+	};
+
+	InputData result;
+
+	read("First room count:", result.firstRoomCount);
+	read("First room cost:", result.firstRoomPrice);
+	read("Second room count:", result.secondRoomCount);
+	read("Second room cost:", result.secondRoomPrice);
+	read("Third room count:", result.thirdRoomCount);
+	read("Third room price:", result.thirdRoomPrice);
+	read("Guests count:", result.guestCount);
+
+	return result;
+}
+
+void FillHotel(Hotel& hotel, const InputData& input)
+{
+	hotel.InsertRoom("First room", input.firstRoomPrice, input.firstRoomCount);
+	hotel.InsertRoom("Second room", input.secondRoomPrice, input.secondRoomCount);
+	hotel.InsertRoom("Third room", input.thirdRoomPrice, input.thirdRoomCount);
 }

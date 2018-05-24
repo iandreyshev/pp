@@ -5,23 +5,26 @@
 #include <map>
 
 #include "IHotelReception.h"
+#include "Types.h"
+#include "IHotelLogger.h"
 
-using CountJournal = std::map<std::string, std::size_t>;
-
-class Hotel : IHotelReception
+class Hotel : public IHotelReception
 {
 public:
+	Hotel(IHotelLogger& logger);
+
 	void InsertRoom(const std::string& name, std::size_t price, std::size_t count);
 
 	Price GetPrice() override;
-	bool TakeRoom(const std::string& name, std::size_t cash) override;
+	bool TakeRoom(const std::string& name) override;
 	bool ReturnRoom(const std::string& name) override;
 
 private:
 	bool IsRoomExists(const std::string& name);
 
+	IHotelLogger& m_logger;
 	Price m_price = Price();
-	CountJournal m_roomsCount = CountJournal();
+	Journal m_roomsCount = Journal();
 	std::size_t m_totalCash = 0;
 
 };

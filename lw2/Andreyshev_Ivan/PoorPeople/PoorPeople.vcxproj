@@ -118,18 +118,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Emulator.cpp" />
+    <ClCompile Include="EmulatorEngine.cpp" />
     <ClCompile Include="Guest.cpp" />
     <ClCompile Include="Hotel.cpp" />
-    <ClCompile Include="HotelMultithreadCSDecorator.cpp" />
+    <ClCompile Include="HotelDecorator.cpp" />
+    <ClCompile Include="CoutLogger.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Emulator.h" />
+    <ClInclude Include="EmulatorEngine.h" />
     <ClInclude Include="Guest.h" />
     <ClInclude Include="Hotel.h" />
+    <ClInclude Include="CoutLogger.h" />
+    <ClInclude Include="IHotelLogger.h" />
     <ClInclude Include="IHotelReception.h" />
-    <ClInclude Include="HotelMultithreadCSDecorator.h" />
+    <ClInclude Include="HotelDecorator.h" />
+    <ClInclude Include="InputData.h" />
+    <ClInclude Include="Types.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
