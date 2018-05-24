@@ -1,9 +1,8 @@
 #include "Guest.h"
 
-void Guest::PassToHotel(Guest guest, IHotelReception* reception)
+Guest::Guest(IHotelReception& hotel)
+	: m_reception(hotel)
 {
-	guest.m_reception = std::shared_ptr<IHotelReception>(reception);
-	guest.StartProcess();
 }
 
 void Guest::StartProcess()

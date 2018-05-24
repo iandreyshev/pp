@@ -7,13 +7,11 @@
 class Guest
 {
 public:
-
-private:
-	void PassToHotel(Guest guest, IHotelReception* reception);
+	Guest(IHotelReception& hotel);
 
 private:
 	void StartProcess();
 
-	std::shared_ptr<IHotelReception> m_reception;
+	IHotelReception& m_reception;
 
 };

@@ -12,7 +12,6 @@ public:
 	void Start();
 
 private:
-
 	std::vector<Guest> m_guests;
 
 };
