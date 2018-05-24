@@ -3,6 +3,7 @@
 
 #include "InputData.h"
 #include "Hotel.h"
+#include "MultiThreadReception.h"
 #include "EmulatorEngine.h"
 #include "CoutLogger.h"
 
@@ -16,9 +17,9 @@ int main(int argc, char* argv[])
 
 	try
 	{
-		CoutLogger logger;
-		Hotel hotel = Hotel(logger);
-		InputData inputData = ReadInput();
+		auto logger = CoutLogger();
+		auto hotel = Hotel(logger);
+		auto inputData = ReadInput();
 
 		FillHotel(hotel, inputData);
 

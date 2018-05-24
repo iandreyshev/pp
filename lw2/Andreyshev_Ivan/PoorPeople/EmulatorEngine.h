@@ -15,6 +15,7 @@ public:
 private:
 	static DWORD WINAPI GuestStrategy(LPVOID param);
 
+	CRITICAL_SECTION m_criticalSection;
 	IHotelReception& m_reception;
 	std::vector<Guest> m_guests;
 	std::vector<HANDLE> m_threads;

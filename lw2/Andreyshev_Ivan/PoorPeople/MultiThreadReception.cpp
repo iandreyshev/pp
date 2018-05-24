@@ -1,12 +1,12 @@
-#include "HotelDecorator.h"
+#include "MultiThreadReception.h"
 
-HotelDecorator::HotelDecorator(IHotelReception& reception, CRITICAL_SECTION& criticalSection)
+MultiThreadReception::MultiThreadReception(IHotelReception& reception, CRITICAL_SECTION& criticalSection)
 	: m_reception(reception)
 	, m_criticalSection(criticalSection)
 {
 }
 
-Price HotelDecorator::GetPrice()
+Price MultiThreadReception::GetPrice()
 {
 	BeginCriticalSection();
 	Price result = m_reception.GetPrice();
@@ -15,7 +15,7 @@ Price HotelDecorator::GetPrice()
 	return result;
 }
 
-bool HotelDecorator::TakeRoom(const std::string& name)
+bool MultiThreadReception::TakeRoom(const std::string& name)
 {
 	BeginCriticalSection();
 	bool result = m_reception.TakeRoom(name);
@@ -24,7 +24,7 @@ bool HotelDecorator::TakeRoom(const std::string& name)
 	return result;
 }
 
-bool HotelDecorator::ReturnRoom(const std::string& name)
+bool MultiThreadReception::ReturnRoom(const std::string& name)
 {
 	BeginCriticalSection();
 	bool result = m_reception.ReturnRoom(name);
@@ -33,12 +33,12 @@ bool HotelDecorator::ReturnRoom(const std::string& name)
 	return result;
 }
 
-void HotelDecorator::BeginCriticalSection()
+void MultiThreadReception::BeginCriticalSection()
 {
 	EnterCriticalSection(&m_criticalSection);
 }
 
-void HotelDecorator::EndCriticalSection()
+void MultiThreadReception::EndCriticalSection()
 {
 	LeaveCriticalSection(&m_criticalSection);
 }

@@ -1,11 +1,13 @@
 #include <time.h>
 
 #include "EmulatorEngine.h"
+#include "MultiThreadReception.h"
 #include "Hotel.h"
 
 EmulatorEngine::EmulatorEngine(IHotelReception& reception)
 	: m_reception(reception)
 {
+	InitializeCriticalSection(&m_criticalSection);
 	srand(0);
 }
 
@@ -13,16 +15,22 @@ void EmulatorEngine::Start(std::size_t guestsCount)
 {
 	for (std::size_t i = 0; i < guestsCount; ++i)
 	{
-		m_guests.push_back(Guest(m_reception));
+		auto reception = MultiThreadReception(m_reception, m_criticalSection);
+		auto guest = Guest(reception);
 
-		auto guestThread = CreateThread(NULL, 0, GuestStrategy, &m_guests.back(), 0, 0);
-		m_threads.push_back(guestThread);
-
-		WaitForMultipleObjects(DWORD(m_threads.size()), m_threads.data(), true, INFINITE);
-
-		m_guests.clear();
-		m_threads.clear();
+		m_guests.push_back(guest);
 	}
+
+	for (auto& guest : m_guests)
+	{
+		auto guestThread = CreateThread(NULL, 0, GuestStrategy, &guest, 0, 0);
+		m_threads.push_back(guestThread);
+	}
+
+	WaitForMultipleObjects(DWORD(m_threads.size()), m_threads.data(), true, INFINITE);
+
+	m_guests.clear();
+	m_threads.clear();
 }
 
 DWORD WINAPI EmulatorEngine::GuestStrategy(LPVOID param)

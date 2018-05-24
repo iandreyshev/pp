@@ -1,6 +1,8 @@
 #include "Guest.h"
 
 #include <Windows.h>
+#include <string>
+#include <iostream>
 
 namespace
 {
@@ -14,6 +16,8 @@ Guest::Guest(IHotelReception& reception)
 {
 	m_cash = rand() % MAX_CASH;
 	m_sleepDuration = rand() % MAX_SLEEP_DURATION;
+	std::cout << "Create guest with cash: " << m_cash << std::endl;
+	std::cout << "Create guest with sleep duration: " << m_sleepDuration << std::endl;
 }
 
 void Guest::StartProcess()
@@ -30,12 +34,10 @@ void Guest::StartProcess()
 
 void Guest::GoHotel(const std::string& roomName, std::size_t cost)
 {
-	if (!m_reception.TakeRoom(roomName))
+	if (m_reception.TakeRoom(roomName))
 	{
-		return;
+		m_cash -= cost;
+		Sleep(m_sleepDuration);
+		m_reception.ReturnRoom(roomName);
 	}
-
-	m_cash -= cost;
-	Sleep(m_sleepDuration);
-	m_reception.ReturnRoom(roomName);
 }

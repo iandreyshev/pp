@@ -27,10 +27,10 @@
     <ClCompile Include="EmulatorEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HotelDecorator.cpp">
+    <ClCompile Include="CoutLogger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CoutLogger.cpp">
+    <ClCompile Include="MultiThreadReception.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,9 +47,6 @@
     <ClInclude Include="EmulatorEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HotelDecorator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="InputData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -60,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CoutLogger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiThreadReception.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

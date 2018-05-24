@@ -4,10 +4,10 @@
 
 #include "IHotelReception.h"
 
-class HotelDecorator : public IHotelReception
+class MultiThreadReception : public IHotelReception
 {
 public:
-	HotelDecorator(IHotelReception& reception, CRITICAL_SECTION& criticalSection);
+	MultiThreadReception(IHotelReception& reception, CRITICAL_SECTION& criticalSection);
 
 	Price GetPrice() override;
 	bool TakeRoom(const std::string & name) override;

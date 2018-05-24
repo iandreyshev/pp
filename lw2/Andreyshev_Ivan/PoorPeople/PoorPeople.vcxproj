@@ -121,7 +121,7 @@
     <ClCompile Include="EmulatorEngine.cpp" />
     <ClCompile Include="Guest.cpp" />
     <ClCompile Include="Hotel.cpp" />
-    <ClCompile Include="HotelDecorator.cpp" />
+    <ClCompile Include="MultiThreadReception.cpp" />
     <ClCompile Include="CoutLogger.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -132,7 +132,7 @@
     <ClInclude Include="CoutLogger.h" />
     <ClInclude Include="IHotelLogger.h" />
     <ClInclude Include="IHotelReception.h" />
-    <ClInclude Include="HotelDecorator.h" />
+    <ClInclude Include="MultiThreadReception.h" />
     <ClInclude Include="InputData.h" />
     <ClInclude Include="Types.h" />
   </ItemGroup>
