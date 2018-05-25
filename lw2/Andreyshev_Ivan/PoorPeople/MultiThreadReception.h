@@ -7,17 +7,17 @@
 class MultiThreadReception : public IHotelReception
 {
 public:
-	MultiThreadReception(IHotelReception& reception, CRITICAL_SECTION& criticalSection);
+	MultiThreadReception(IHotelReception& reception, HANDLE& mutex);
 
 	Price GetPrice() override;
-	bool TakeRoom(const std::string & name) override;
-	bool ReturnRoom(const std::string & name) override;
+	bool TakeRoom(const std::string& name) override;
+	void ReturnRoom(const std::string& name) override;
 
 private:
-	void BeginCriticalSection();
-	void EndCriticalSection();
+	void LockMutex();
+	void UnlockMutex();
 
 	IHotelReception& m_reception;
-	CRITICAL_SECTION& m_criticalSection;
-
+	HANDLE& m_mutex;
+	int m_waitResult;
 };

@@ -7,15 +7,16 @@
 class Guest
 {
 public:
-	Guest(IHotelReception& reception);
+	Guest(const std::shared_ptr<IHotelReception>& reception);
 
 	void StartProcess();
 
 private:
-	void GoHotel(const std::string& roomName, std::size_t cost);
+	bool GoToRoom(const std::string& roomName, std::size_t cost);
 
-	IHotelReception& m_reception;
+	std::shared_ptr<IHotelReception> m_reception;
 	std::size_t m_cash;
 	int m_sleepDuration;
+	std::string m_name;
 
 };

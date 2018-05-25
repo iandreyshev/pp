@@ -5,7 +5,7 @@
 #include "Hotel.h"
 #include "MultiThreadReception.h"
 #include "EmulatorEngine.h"
-#include "CoutLogger.h"
+#include "GuestLogger.h"
 
 InputData ReadInput();
 void FillHotel(Hotel& hotel, const InputData& input);
@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
 
 	try
 	{
-		auto logger = CoutLogger();
+		auto logger = GuestLogger();
 		auto hotel = Hotel(logger);
 		auto inputData = ReadInput();
 

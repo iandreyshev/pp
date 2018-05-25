@@ -2,10 +2,10 @@
 
 #include "Types.h"
 
-class IHotelLogger
+class IGuestLogger
 {
 public:
-	virtual ~IHotelLogger() = default;
+	virtual ~IGuestLogger() = default;
 
 	virtual void LogPrice(const Price& price) = 0;
 	virtual void LogJournal(const Journal& journal) = 0;

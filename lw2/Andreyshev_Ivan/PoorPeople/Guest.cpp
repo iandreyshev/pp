@@ -6,38 +6,43 @@
 
 namespace
 {
-	const int MAX_CASH = 16000;
-	const int MAX_SLEEP_DURATION = 2000;
-	const int MAGIC_NUMBER = 997;
+	const int MAX_CASH = 1000;
+	const int MAX_SLEEP_DURATION = 1000;
 }
 
-Guest::Guest(IHotelReception& reception)
+Guest::Guest(const std::shared_ptr<IHotelReception>& reception)
 	: m_reception(reception)
 {
 	m_cash = rand() % MAX_CASH;
 	m_sleepDuration = rand() % MAX_SLEEP_DURATION;
-	std::cout << "Create guest with cash: " << m_cash << std::endl;
-	std::cout << "Create guest with sleep duration: " << m_sleepDuration << std::endl;
 }
 
 void Guest::StartProcess()
 {
-	for (auto const& priceUnit : m_reception.GetPrice())
+	for (auto& priceUnit : m_reception->GetPrice())
 	{
-		if (priceUnit.second <= m_cash)
+		if (GoToRoom(priceUnit.first, priceUnit.second))
 		{
-			GoHotel(priceUnit.first, priceUnit.second);
 			break;
 		}
 	}
 }
 
-void Guest::GoHotel(const std::string& roomName, std::size_t cost)
+bool Guest::GoToRoom(const std::string& roomName, std::size_t cost)
 {
-	if (m_reception.TakeRoom(roomName))
+	if (cost > m_cash)
+	{
+		return false;
+	}
+
+	if (m_reception->TakeRoom(roomName))
 	{
 		m_cash -= cost;
-		Sleep(m_sleepDuration);
-		m_reception.ReturnRoom(roomName);
+		Sleep(10000);
+		m_reception->ReturnRoom(roomName);
+
+		return true;
 	}
+
+	return false;
 }

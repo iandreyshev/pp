@@ -27,10 +27,10 @@
     <ClCompile Include="EmulatorEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CoutLogger.cpp">
+    <ClCompile Include="MultiThreadReception.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MultiThreadReception.cpp">
+    <ClCompile Include="GuestLogger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,16 +50,16 @@
     <ClInclude Include="InputData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IHotelLogger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CoutLogger.h">
+    <ClInclude Include="MultiThreadReception.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MultiThreadReception.h">
+    <ClInclude Include="IGuestLogger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GuestLogger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

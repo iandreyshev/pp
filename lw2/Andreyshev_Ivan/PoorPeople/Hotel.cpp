@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Hotel::Hotel(IHotelLogger& logger)
+Hotel::Hotel(IGuestLogger& logger)
 	: m_logger(logger)
 {
 }
@@ -45,16 +45,14 @@ bool Hotel::TakeRoom(const std::string& name)
 	return true;
 }
 
-bool Hotel::ReturnRoom(const std::string& name)
+void Hotel::ReturnRoom(const std::string& name)
 {
 	if (!IsRoomExists(name))
 	{
-		return false;
+		return;
 	}
 
 	++m_roomsCount.at(name);
-
-	return true;
 }
 
 bool Hotel::IsRoomExists(const std::string& name)

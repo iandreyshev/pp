@@ -1,8 +1,8 @@
 #pragma once
 
-#include "IHotelLogger.h"
+#include "IGuestLogger.h"
 
-class CoutLogger : public IHotelLogger
+class GuestLogger : public IGuestLogger
 {
 public:
 	virtual void LogPrice(const Price& price) override;
