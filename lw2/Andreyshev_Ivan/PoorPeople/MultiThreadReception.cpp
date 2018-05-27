@@ -1,45 +1,46 @@
 #include "MultiThreadReception.h"
 
-MultiThreadReception::MultiThreadReception(IHotelReception& reception, HANDLE& mutex)
+#include <iostream>
+
+MultiThreadReception::MultiThreadReception(IReception& reception, CRITICAL_SECTION& criticalSection)
 	: m_reception(reception)
-	, m_mutex(mutex)
+	, m_criticalSection(criticalSection)
 {
 }
 
 Price MultiThreadReception::GetPrice()
 {
-	LockMutex();
+	LockThread();
 	Price result = m_reception.GetPrice();
-	UnlockMutex();
+	UnlockThread();
 
 	return result;
 }
 
 bool MultiThreadReception::TakeRoom(const std::string& name)
 {
-	LockMutex();
+	LockThread();
 	bool result = m_reception.TakeRoom(name);
-	UnlockMutex();
+	UnlockThread();
 
 	return result;
 }
 
 void MultiThreadReception::ReturnRoom(const std::string& name)
 {
-	LockMutex();
+	LockThread();
 	m_reception.ReturnRoom(name);
-	UnlockMutex();
+	UnlockThread();
 }
 
-void MultiThreadReception::LockMutex()
+void MultiThreadReception::LockThread()
 {
-	m_waitResult = WaitForSingleObject(m_mutex, INFINITE);
+	EnterCriticalSection(&m_criticalSection);
+	std::cout << "Reception thread: LOCKED" << std::endl;
 }
 
-void MultiThreadReception::UnlockMutex()
+void MultiThreadReception::UnlockThread()
 {
-	if (m_waitResult == WAIT_OBJECT_0)
-	{
-		ReleaseMutex(m_mutex);
-	}
+	std::cout << "Reception thread: UNLOCKED" << std::endl;
+	LeaveCriticalSection(&m_criticalSection);
 }

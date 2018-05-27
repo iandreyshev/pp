@@ -21,27 +21,21 @@
     <ClCompile Include="Guest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Hotel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="EmulatorEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MultiThreadReception.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GuestLogger.cpp">
+    <ClCompile Include="ReceptionLogger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Reception.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Hotel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Guest.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IHotelReception.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EmulatorEngine.h">
@@ -56,10 +50,16 @@
     <ClInclude Include="MultiThreadReception.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IGuestLogger.h">
+    <ClInclude Include="ReceptionLogger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GuestLogger.h">
+    <ClInclude Include="Reception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IReceptionLogger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IReception.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

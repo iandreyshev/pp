@@ -2,22 +2,22 @@
 
 #include <Windows.h>
 
-#include "IHotelReception.h"
+#include "IReception.h"
 
-class MultiThreadReception : public IHotelReception
+class MultiThreadReception : public IReception
 {
 public:
-	MultiThreadReception(IHotelReception& reception, HANDLE& mutex);
+	MultiThreadReception(IReception& reception, CRITICAL_SECTION& criticalSection);
 
 	Price GetPrice() override;
 	bool TakeRoom(const std::string& name) override;
 	void ReturnRoom(const std::string& name) override;
 
 private:
-	void LockMutex();
-	void UnlockMutex();
+	void LockThread();
+	void UnlockThread();
 
-	IHotelReception& m_reception;
-	HANDLE& m_mutex;
-	int m_waitResult;
+	CRITICAL_SECTION& m_criticalSection;
+	IReception& m_reception;
+
 };

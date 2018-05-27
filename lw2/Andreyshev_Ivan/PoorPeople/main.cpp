@@ -2,13 +2,13 @@
 #include <string>
 
 #include "InputData.h"
-#include "Hotel.h"
+#include "Reception.h"
 #include "MultiThreadReception.h"
 #include "EmulatorEngine.h"
-#include "GuestLogger.h"
+#include "ReceptionLogger.h"
 
 InputData ReadInput();
-void FillHotel(Hotel& hotel, const InputData& input);
+void FillHotel(Reception& hotel, const InputData& input);
 
 int main(int argc, char* argv[])
 {
@@ -17,8 +17,8 @@ int main(int argc, char* argv[])
 
 	try
 	{
-		auto logger = GuestLogger();
-		auto hotel = Hotel(logger);
+		auto logger = ReceptionLogger();
+		auto hotel = Reception(logger);
 		auto inputData = ReadInput();
 
 		FillHotel(hotel, inputData);
@@ -62,7 +62,7 @@ InputData ReadInput()
 	return result;
 }
 
-void FillHotel(Hotel& hotel, const InputData& input)
+void FillHotel(Reception& hotel, const InputData& input)
 {
 	hotel.InsertRoom("First room", input.firstRoomPrice, input.firstRoomCount);
 	hotel.InsertRoom("Second room", input.secondRoomPrice, input.secondRoomCount);

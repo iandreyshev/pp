@@ -10,7 +10,7 @@ namespace
 	const int MAX_SLEEP_DURATION = 1000;
 }
 
-Guest::Guest(const std::shared_ptr<IHotelReception>& reception)
+Guest::Guest(const std::shared_ptr<IReception>& reception)
 	: m_reception(reception)
 {
 	m_cash = rand() % MAX_CASH;
@@ -38,7 +38,6 @@ bool Guest::GoToRoom(const std::string& roomName, std::size_t cost)
 	if (m_reception->TakeRoom(roomName))
 	{
 		m_cash -= cost;
-		Sleep(10000);
 		m_reception->ReturnRoom(roomName);
 
 		return true;

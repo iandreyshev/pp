@@ -2,28 +2,29 @@
 
 #include "EmulatorEngine.h"
 #include "MultiThreadReception.h"
-#include "Hotel.h"
+#include "Reception.h"
 
-EmulatorEngine::EmulatorEngine(IHotelReception& reception)
+EmulatorEngine::EmulatorEngine(IReception& reception)
 	: m_reception(reception)
 {
-	srand(0);
+	srand(NULL);
 }
 
 void EmulatorEngine::Start(std::size_t guestsCount)
 {
-	m_mutex = CreateMutex(NULL, FALSE, NULL);
+	InitializeCriticalSection(&m_criticalSection);
 
 	for (std::size_t i = 0; i < guestsCount; ++i)
 	{
 		auto guest = Guest(
-			std::make_shared<MultiThreadReception>(m_reception, m_mutex));
+			std::make_shared<MultiThreadReception>(m_reception, m_criticalSection));
 		m_guests.push_back(guest);
 	}
 
 	for (auto& guest : m_guests)
 	{
-		auto guestThread = CreateThread(NULL, 0, GuestStrategy, &guest, 0, DWORD());
+		auto guestThread =
+			CreateThread(NULL, 0, GuestStrategy, &guest, 0, 0);
 		m_threads.push_back(guestThread);
 	}
 

@@ -4,14 +4,14 @@
 #include <vector>
 #include <map>
 
-#include "IHotelReception.h"
+#include "IReception.h"
 #include "Types.h"
-#include "IGuestLogger.h"
+#include "IReceptionLogger.h"
 
-class Hotel : public IHotelReception
+class Reception : public IReception
 {
 public:
-	Hotel(IGuestLogger& logger);
+	Reception(IReceptionLogger& logger);
 
 	void InsertRoom(const std::string& name, std::size_t price, std::size_t count);
 
@@ -22,7 +22,7 @@ public:
 private:
 	bool IsRoomExists(const std::string& name);
 
-	IGuestLogger& m_logger;
+	IReceptionLogger& m_logger;
 	Price m_price = Price();
 	Journal m_roomsCount = Journal();
 	std::size_t m_totalCash = 0;

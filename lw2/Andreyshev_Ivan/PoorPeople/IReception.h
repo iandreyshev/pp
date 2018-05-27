@@ -5,10 +5,10 @@
 
 #include "Types.h"
 
-class IHotelReception
+class IReception
 {
 public:
-	virtual ~IHotelReception() = default;
+	virtual ~IReception() = default;
 
 	virtual Price GetPrice() = 0;
 	virtual bool TakeRoom(const std::string& name) = 0;

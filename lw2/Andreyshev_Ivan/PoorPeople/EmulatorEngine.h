@@ -8,16 +8,16 @@
 class EmulatorEngine
 {
 public:
-	EmulatorEngine(IHotelReception& reception);
+	EmulatorEngine(IReception& reception);
 
 	void Start(std::size_t guestsCount);
 
 private:
 	static DWORD WINAPI GuestStrategy(LPVOID param);
 
-	IHotelReception& m_reception;
+	IReception& m_reception;
 	std::vector<Guest> m_guests;
 	std::vector<HANDLE> m_threads;
-	HANDLE m_mutex;
+	CRITICAL_SECTION m_criticalSection;
 
 };
