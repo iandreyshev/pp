@@ -35,7 +35,7 @@ bool Reception::TakeRoom(const std::string& name)
 		return false;
 	}
 
-	//--m_roomsCount.at(name);
+	--m_roomsCount.at(name);
 	m_totalCash += m_price.find(name)->second;
 
 	m_logger.LogPrice(m_price);
@@ -55,7 +55,7 @@ void Reception::ReturnRoom(const std::string& name)
 
 	m_logger.LogRoomReturn(name);
 
-	//++m_roomsCount.at(name);
+	++m_roomsCount.at(name);
 }
 
 bool Reception::IsRoomExists(const std::string& name)
