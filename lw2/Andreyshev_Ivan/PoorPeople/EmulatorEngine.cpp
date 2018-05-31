@@ -29,11 +29,11 @@ void EmulatorEngine::Start(std::size_t guestsCount)
 	}
 
 	WaitForMultipleObjects(DWORD(m_threads.size()), m_threads.data(), TRUE, INFINITE);
+	while (true);
 }
 
 DWORD WINAPI EmulatorEngine::GuestStrategy(LPVOID param)
 {
 	reinterpret_cast<Guest*>(param)->StartProcess();
-
 	return 0;
 }

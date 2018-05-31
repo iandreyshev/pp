@@ -1,0 +1,150 @@
+Get price
+Try to take 'First room'
+Room 'First room' successful taken
+--Journal--
+  First room -> 9
+  Second room -> 10
+  Third room -> 10
+--Price--
+  First room -> 10
+  Second room -> 10
+  Third room -> 10
+--Cash--
+  10
+Get price
+Try to take 'First room'
+Room 'First room' successful taken
+--Journal--
+  First room -> 8
+  Second room -> 10
+  Third room -> 10
+--Price--
+  First room -> 10
+  Second room -> 10
+  Third room -> 10
+--Cash--
+  20
+Get price
+Try to take 'First room'
+Room 'First room' successful taken
+--Journal--
+  First room -> 7
+  Second room -> 10
+  Third room -> 10
+--Price--
+  First room -> 10
+  Second room -> 10
+  Third room -> 10
+--Cash--
+  30
+Get price
+Try to take 'First room'
+Room 'First room' successful taken
+--Journal--
+  First room -> 6
+  Second room -> 10
+  Third room -> 10
+--Price--
+  First room -> 10
+  Second room -> 10
+  Third room -> 10
+--Cash--
+  40
+Get price
+Try to take 'First room'
+Room 'First room' successful taken
+--Journal--
+  First room -> 5
+  Second room -> 10
+  Third room -> 10
+--Price--
+  First room -> 10
+  Second room -> 10
+  Third room -> 10
+--Cash--
+  50
+Get price
+Try to take 'First room'
+Room 'First room' successful taken
+--Journal--
+  First room -> 4
+  Second room -> 10
+  Third room -> 10
+--Price--
+  First room -> 10
+  Second room -> 10
+  Third room -> 10
+--Cash--
+  60
+Get price
+Try to take 'First room'
+Room 'First room' successful taken
+--Journal--
+  First room -> 3
+  Second room -> 10
+  Third room -> 10
+--Price--
+  First room -> 10
+  Second room -> 10
+  Third room -> 10
+--Cash--
+  70
+Get price
+Try to take 'First room'
+Room 'First room' successful taken
+--Journal--
+  First room -> 2
+  Second room -> 10
+  Third room -> 10
+--Price--
+  First room -> 10
+  Second room -> 10
+  Third room -> 10
+--Cash--
+  80
+Get price
+Try to take 'First room'
+Room 'First room' successful taken
+--Journal--
+  First room -> 1
+  Second room -> 10
+  Third room -> 10
+--Price--
+  First room -> 10
+  Second room -> 10
+  Third room -> 10
+--Cash--
+  90
+Get price
+Try to take 'First room'
+Room 'First room' successful taken
+--Journal--
+  First room -> 0
+  Second room -> 10
+  Third room -> 10
+--Price--
+  First room -> 10
+  Second room -> 10
+  Third room -> 10
+--Cash--
+  100
+Try to return room 'First room'
+Room 'First room' returned
+Try to return room 'First room'
+Room 'First room' returned
+Try to return room 'First room'
+Room 'First room' returned
+Try to return room 'First room'
+Room 'First room' returned
+Try to return room 'First room'
+Room 'First room' returned
+Try to return room 'First room'
+Room 'First room' returned
+Try to return room 'First room'
+Room 'First room' returned
+Try to return room 'First room'
+Room 'First room' returned
+Try to return room 'First room'
+Room 'First room' returned
+Try to return room 'First room'
+Room 'First room' returned

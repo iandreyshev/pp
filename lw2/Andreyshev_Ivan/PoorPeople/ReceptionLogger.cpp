@@ -1,43 +1,48 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 
 #include "ReceptionLogger.h"
 
+ReceptionLogger::ReceptionLogger(std::ostream& output)
+	: m_output(output)
+{
+}
+
 void ReceptionLogger::LogBreak()
 {
-	std::cout << std::endl;
+	m_output << std::endl;
+}
+
+void ReceptionLogger::Log(const std::string& message)
+{
+	m_output << message << std::endl;
 }
 
 void ReceptionLogger::LogPrice(const Price& price)
 {
-	std::cout << "--Price--" << std::endl;
+	m_output << "--Price--" << std::endl;
 
 	for (const auto& priceUnit : price)
 	{
-		std::cout << "  " << priceUnit.first
+		m_output << "  " << priceUnit.first
 			<< " -> " << priceUnit.second << std::endl;
 	}
 }
 
 void ReceptionLogger::LogJournal(const Journal& journal)
 {
-	std::cout << "--Journal--" << std::endl;
+	m_output << "--Journal--" << std::endl;
 
 	for (const auto& journalUnit : journal)
 	{
-		std::cout << "  " << journalUnit.first
+		m_output << "  " << journalUnit.first
 			<< " -> " << journalUnit.second << std::endl;
 	}
 }
 
 void ReceptionLogger::LogTotalCash(std::size_t cash)
 {
-	std::cout << "--Cash--" << std::endl
+	m_output << "--Cash--" << std::endl
 		<< "  " << cash << std::endl;
-}
-
-void ReceptionLogger::LogRoomReturn(const std::string roomName)
-{
-	std::cout << "--Return room--" << std::endl
-		<< "  " << roomName << std::endl;
 }

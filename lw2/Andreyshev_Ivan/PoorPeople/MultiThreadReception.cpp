@@ -36,11 +36,15 @@ void MultiThreadReception::ReturnRoom(const std::string& name)
 void MultiThreadReception::LockThread()
 {
 	EnterCriticalSection(&m_criticalSection);
-	std::cout << "Reception thread: LOCKED" << std::endl;
+
+	std::cout << "Reception thread: LOCKED. Thread id: "
+		<< GetCurrentThreadId() << std::endl;
 }
 
 void MultiThreadReception::UnlockThread()
 {
-	std::cout << "Reception thread: UNLOCKED" << std::endl;
+	std::cout << "Reception thread: UNLOCKED. Thread id: "
+		<< GetCurrentThreadId() << std::endl;
+
 	LeaveCriticalSection(&m_criticalSection);
 }

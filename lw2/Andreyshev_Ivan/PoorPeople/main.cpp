@@ -1,11 +1,17 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 
 #include "InputData.h"
 #include "Reception.h"
 #include "MultiThreadReception.h"
 #include "EmulatorEngine.h"
 #include "ReceptionLogger.h"
+
+namespace
+{
+	const std::string LOG_FILE_NAME = "trace.log";
+}
 
 InputData ReadInput();
 void FillHotel(Reception& hotel, const InputData& input);
@@ -17,7 +23,8 @@ int main(int argc, char* argv[])
 
 	try
 	{
-		auto logger = ReceptionLogger();
+		auto logFile = std::ofstream(LOG_FILE_NAME);
+		auto logger = ReceptionLogger(logFile);
 		auto hotel = Reception(logger);
 		auto inputData = ReadInput();
 
@@ -31,8 +38,6 @@ int main(int argc, char* argv[])
 		std::cerr << "Error: " << ex.what() << std::endl;
 		return 1;
 	}
-
-	return 0;
 }
 
 InputData ReadInput()

@@ -15,6 +15,11 @@ Guest::Guest(const std::shared_ptr<IReception>& reception)
 {
 	m_cash = rand() % MAX_CASH;
 	m_sleepDuration = rand() % MAX_SLEEP_DURATION;
+
+	std::cout << "Guest created:" << std::endl
+		<< "  Cash: " << m_cash << std::endl
+		<< "  Sleep duration: " << m_sleepDuration
+		<< std::endl << std::endl;
 }
 
 void Guest::StartProcess()
@@ -34,14 +39,14 @@ bool Guest::GoToRoom(const std::string& roomName, std::size_t cost)
 	{
 		return false;
 	}
-
-	if (m_reception->TakeRoom(roomName))
+	else if (!m_reception->TakeRoom(roomName))
 	{
-		m_cash -= cost;
-		m_reception->ReturnRoom(roomName);
-
-		return true;
+		return false;
 	}
 
-	return false;
+	m_cash -= cost;
+	Sleep((DWORD)m_sleepDuration);
+	m_reception->ReturnRoom(roomName);
+
+	return true;
 }
